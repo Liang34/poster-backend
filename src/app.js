@@ -8,7 +8,7 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-
+const jwt = require('./middlewares/jwt')
 // error handler
 onerror(app)
 
@@ -23,6 +23,8 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
+// 配置 jwt
+app.use(jwt)
 
 // logger
 app.use(async (ctx, next) => {
