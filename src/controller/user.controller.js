@@ -1,4 +1,2 @@
-class UserController {
-
-}
-module.exports = new UserController();
+class UserController {}
+module.exports = new UserController()

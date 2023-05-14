@@ -11,5 +11,5 @@
 // if (isPrd) fileName = 'prd.js'
 
 // const conf = require(`./envs/${fileName}`) // eslint-disable-line
-const conf = require(`./envs/dev.js`) 
+const conf = require(`./envs/dev.js`)
 module.exports = conf

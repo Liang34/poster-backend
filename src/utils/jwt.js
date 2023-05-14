@@ -3,7 +3,7 @@
  * @author liangjianhui
  */
 
-const util = require('node:util')
+const util = require('util')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET, jwtExpiresIn } = require('../config/constant')
 

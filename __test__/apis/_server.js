@@ -42,7 +42,6 @@ async function ajax(method = 'get', url = '', bodyOrParams = {}, headers = {}) {
         let res
         if (method === 'get') {
             res = await request[method](url).query(bodyOrParams).set(headers)
-            
         } else {
             res = await request[method](url).send(bodyOrParams).set(headers)
         }
