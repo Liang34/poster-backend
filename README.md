@@ -36,3 +36,4 @@
 }
 ```
 使用Docker部署
+docker-compose
