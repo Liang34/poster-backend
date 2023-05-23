@@ -35,11 +35,11 @@ jobs:
                     # 然后 git clone https://username:password@github.com/imooc-lego/biz-editor-server.git -b dev （私有仓库，使用 github 用户名和密码）
                     # 记得删除 origin ，否则会暴露 github 密码
 
-                    cd /home/work/imooc-lego/biz-editor-server;
-                    git remote add origin https://wangfupeng1988:${{secrets.WFP_PASSWORD}}@github.com/imooc-lego/biz-editor-server.git;
+                    cd /home/work/poster/backend/test
+                    git clone https://github.com/Liang34/coderHub.git
+                    cd coderHub/
                     git checkout dev;
                     git pull origin dev; # 重新下载最新代码
-                    git remote remove origin; # 删除 origin ，否则会暴露 github 密码
                     # 启动 docker
                     docker-compose build editor-server; # 和 docker-compose.yml service 名字一致
                     docker-compose up -d;
