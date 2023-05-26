@@ -25,7 +25,7 @@ jobs:
             - name: set ssh key # 临时设置 ssh key
               run: |
                   mkdir -p ~/.ssh/
-                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa
+                  echo "${{secrets.SERVICE_PASS}}" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan "124.71.170.85" >> ~/.ssh/known_hosts
             - name: deploy # 部署
