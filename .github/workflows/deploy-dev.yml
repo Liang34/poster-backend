@@ -39,6 +39,5 @@ jobs:
                     # 启动 docker
                     docker-compose build editor-server; # 和 docker-compose.yml service 名字一致
                     docker-compose up -d;
-                  "
             - name: delete ssh key # 删除 ssh key
               run: rm -rf ~/.ssh/id_rsa
