@@ -28,7 +28,7 @@ jobs:
                   echo "${{secrets.SERVICE_PASS}}" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan "124.71.170.85" >> ~/.ssh/known_hosts
-            - name: deploy # 部署
+            - name: deploy # 部署test
               run: |
                   ssh work@124.71.170.85 "
                     cd /home/work/poster/backend/test;
