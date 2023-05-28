@@ -30,15 +30,6 @@ jobs:
                   ssh-keyscan "124.71.170.85" >> ~/.ssh/known_hosts
             - name: deploy # 部署测试work
               run: |
-                  ssh work@124.71.170.85 "
-                    cd /home/work/poster/backend/test;
-                    git clone https://github.com/Liang34/coderHub.git;
-                    cd coderHub/;
-                    git checkout dev;
-                    git pull origin dev; # 重新下载最新代码
-                    # 启动 docker
-                    docker-compose build editor-server; # 和 docker-compose.yml service 名字一致
-                    docker-compose up -d;
-                  "
+                  ssh work@124.71.170.85
             - name: delete ssh key # 删除 ssh key
               run: rm -rf ~/.ssh/id_rsa
