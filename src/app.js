@@ -29,7 +29,7 @@ app.use(
     })
 )
 // 配置 jwt
-app.use(jwt);
+app.use(jwt)
 
 // logger
 app.use(async (ctx, next) => {
