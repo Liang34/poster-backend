@@ -30,7 +30,7 @@ jobs:
                   ssh-keyscan "124.71.170.85" >> ~/.ssh/known_hosts
             - name: deploy # 部署
               run: |
-                  ssh work@124.71.170.85 "
+                  ssh root@124.71.170.85 "
                     cd /home/work/poster/backend/test;
                     git clone https://github.com/Liang34/coderHub.git;
                     cd coderHub/;
