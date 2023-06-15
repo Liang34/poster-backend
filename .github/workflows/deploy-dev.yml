@@ -32,7 +32,7 @@ jobs:
               run: |
                   ssh root@124.71.170.85 "
                     cd /home/work/poster/backend/test;
-                    git clone https://github.com/Liang34/coderHub.git;
+                    git clone git@github.com:Liang34/poster-backend.git;
                     cd coderHub/;
                     git checkout dev;
                     git pull origin dev; # 重新下载最新代码
