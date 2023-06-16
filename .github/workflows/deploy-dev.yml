@@ -31,7 +31,7 @@ jobs:
             - name: deploy # 部署test1
               run: |
                   ssh root@124.71.170.85 "
-                    cd /home/work/poster/backend/test;
+                    cd /home/work/poster/backend/test2;
                     # git clone git@github.com:Liang34/poster-backend.git; # 初次拉取代码
                     cd poster-backend/;
                     git checkout dev;
