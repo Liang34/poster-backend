@@ -36,7 +36,7 @@ services:
     editor-mongo:
         image: mongo # 引用官网 mongo 镜像
         container_name: editor-mongo
-        restart: always
+        restart: always # 容器报错重启
         volumes:
             - '.docker-volumes/mongo/data:/data/db' # 数据持久化
         environment:
