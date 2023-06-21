@@ -1,6 +1,6 @@
 /**
  * @description 生成一个密码。手机号注册时，需要生成一个随机的密码
- * @author 双越
+ * @author liangjianhui
  */
 
 const { v4: uuidV4 } = require('uuid')

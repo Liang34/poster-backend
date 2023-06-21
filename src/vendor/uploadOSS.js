@@ -1,6 +1,6 @@
 /**
  * @description 上传文件到 oss
- * @author 双越
+ * @author liangjianhui
  */
 
 const fs = require('fs')
