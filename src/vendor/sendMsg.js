@@ -1,6 +1,6 @@
 /**
  * @description 发送短信
- * @author 双越
+ * @author liangjianhui
  */
 
 const tencentcloud = require('tencentcloud-sdk-nodejs')
