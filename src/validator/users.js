@@ -4,17 +4,18 @@
  */
 
 // 手机号规则
-const phoneNumberRule = {
+const emailRule = {
     type: 'string',
-    pattern: '^1[34578]\\d{9}$', // 手机号正则
+    pattern:
+        /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/, // 验证邮箱正则
 }
 
-// 手机号 schema
-const phoneNumberSchema = {
+// emailSchema
+const emailSchema = {
     type: 'object',
-    required: ['phoneNumber'],
+    required: ['emailAddress'],
     properties: {
-        phoneNumber: phoneNumberRule,
+        emailAddress: emailRule,
         isRemoteTest: {
             type: 'boolean',
         },
@@ -26,7 +27,7 @@ const phoneNumberVeriCodeSchema = {
     type: 'object',
     required: ['phoneNumber', 'veriCode'],
     properties: {
-        phoneNumber: phoneNumberRule,
+        // phoneNumber: phoneNumberRule,
         veriCode: {
             type: 'string',
             pattern: '^\\d{4}$', // 四位数字
@@ -58,7 +59,7 @@ const userInfoSchema = {
 }
 
 module.exports = {
-    phoneNumberSchema,
+    emailSchema,
     phoneNumberVeriCodeSchema,
     userInfoSchema,
 }

@@ -25,7 +25,7 @@ router.get('/api/db-check', async ctx => {
             },
             { timestamps: true }
         )
-        await mongoose.model('workContent', contentSchema).findOne()
+        await mongoose.model('workContent1', contentSchema).findOne()
     } catch (ex) {
         mongodbConn = false
     }

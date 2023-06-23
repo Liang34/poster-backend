@@ -3,6 +3,8 @@
  * @author liangjianhui
  */
 
+const nodemailer = require('nodemailer')
+const smtpTransport = require('nodemailer-smtp-transport')
 const { getVeriCodeFromCache, setVeriCodeToCache } = require('../../cache/users/veriCode')
 const { sendVeriCodeMsg } = require('../../vendor/sendMsg')
 const {
@@ -12,58 +14,56 @@ const {
 const { ErrorRes, SuccessRes } = require('../../res-model/index')
 const { isDev, isTest, isPrd } = require('../../utils/env')
 const { msgVeriCodeTimeout } = require('../../config/index')
-
+const { smtpAuth } = require('../../config/envs/dev')
 /**
- * 发送短信验证码
- * @param {string} phoneNumber 手机号
+ * 发送邮箱验证码
+ * @param {string} emailAddress 邮箱地址
  * @param {boolean} isRemoteTest 是否测试
  */
-async function sendVeriCode(phoneNumber, isRemoteTest = false) {
+async function sendVeriCode(emailAddress) {
     // 从缓存获取验证码，看是否有效
-    const codeFromCache = await getVeriCodeFromCache(phoneNumber)
+    const codeFromCache = await getVeriCodeFromCache(emailAddress)
     if (codeFromCache) {
         if (!isPrd) {
             // 非线上环境，直接返回
             return new SuccessRes({ code: codeFromCache })
         }
-        // 说明刚刚已经发送过，不要再重新发送 —— 【注意】如不做这个限制，轻易重复发送，短信服务将浪费不少钱
+        // 说明刚刚已经发送过，不要再重新发送 —— 【注意】如不做这个限制，轻易重复发送，导致邮箱服务出问题
         return new ErrorRes(sendVeriCodeFrequentlyFailInfo)
     }
 
     // 缓存中没有，则发送
     const veriCode = Math.random().toString().slice(-4) // 生成随机数
-    let sendSuccess = false
 
-    if (isTest) {
-        // 本地接口测试，不发短信，直接返回验证码。发短信，会有单独的接口测试。
-        sendSuccess = true
-    } else if (isRemoteTest) {
-        // 用于远程接口测试，也不用发短信
-        sendSuccess = true
-    } else {
-        // 其他情况，正式发短信
-        try {
-            // 短信提示的过期时间（单位分钟）
-            const msgTimeoutMin = (msgVeriCodeTimeout / 60).toString()
-            // 发送短信
-            await sendVeriCodeMsg(phoneNumber, veriCode, msgTimeoutMin)
-            sendSuccess = true
-        } catch (ex) {
-            sendSuccess = false
-            console.error('发送短信验证码错误', ex)
+    const transport = nodemailer.createTransport(
+        smtpTransport({
+            host: 'smtp.163.com', // 服务 由于我用的163邮箱
+            port: 465, // smtp端口 默认无需改动
+            secure: true,
+            auth: smtpAuth,
+        })
+    )
 
-            // TODO 及时报警，尽快解决问题
+    // let sendSuccess = false
+    transport.sendMail(
+        {
+            from: smtpAuth.user, // 发件邮箱
+            to: emailAddress, // 收件列表
+            subject: '验证你的电子邮件', // 标题
+            html: `
+      <p>你好！</p>
+      <p>您正在注册账号</p>
+      <p>你的验证码是：<strong style="color: #ff4e2a;">${veriCode}</strong></p>
+      <p>***该验证码5分钟内有效***</p>`, // html 内容
+        },
+        (error, data) => {
+            transport.close() // 如果没用，关闭连接池
         }
-    }
-
-    if (!sendSuccess) {
-        return new ErrorRes(sendVeriCodeErrorFailInfo)
-    }
-
+    )
     // 发送短信成功，然后缓存，设置 timeout，重要！！！
-    setVeriCodeToCache(phoneNumber, veriCode, msgVeriCodeTimeout)
+    setVeriCodeToCache(emailAddress, veriCode, msgVeriCodeTimeout)
 
-    // 返回成功信息
+    // // 返回成功信息
     const resData = isPrd ? {} : { code: veriCode } // 非线上环境，返回验证码
     return new SuccessRes(resData)
 }

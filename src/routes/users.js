@@ -9,11 +9,7 @@ const { SuccessRes } = require('../res-model/index')
 // 中间件
 const loginCheck = require('../middlewares/loginCheck')
 const genValidator = require('../middlewares/genValidator')
-const {
-    phoneNumberSchema,
-    phoneNumberVeriCodeSchema,
-    userInfoSchema,
-} = require('../validator/users')
+const { emailSchema, phoneNumberVeriCodeSchema, userInfoSchema } = require('../validator/users')
 
 // controller
 const sendVeriCode = require('../controller/users/sendVeriCode')
@@ -23,12 +19,12 @@ const updateUserInfo = require('../controller/users/updateUserInfo')
 // 路由前缀
 router.prefix('/api/users')
 
-// 生成短信验证码
-router.post('/genVeriCode', genValidator(phoneNumberSchema), async ctx => {
-    const { phoneNumber, isRemoteTest } = ctx.request.body
+// 生成邮箱验证码
+router.post('/genVeriCode', genValidator(emailSchema), async ctx => {
+    const { emailAddress } = ctx.request.body
 
     // 尝试发送验证码
-    const res = await sendVeriCode(phoneNumber, isRemoteTest)
+    const res = await sendVeriCode(emailAddress)
 
     ctx.body = res
 })
