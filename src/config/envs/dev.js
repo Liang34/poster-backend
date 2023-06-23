@@ -24,4 +24,9 @@ module.exports = {
         port: '6379',
         host: '127.0.0.1',
     },
+    // SMTP
+    smtpAuth: {
+        user: '18948006184@163.com',
+        pass: 'ZIEUFIMWRMCCLJNS', // SMTP授权码
+    },
 }
