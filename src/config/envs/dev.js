@@ -29,4 +29,7 @@ module.exports = {
         user: '18948006184@163.com',
         pass: 'ZIEUFIMWRMCCLJNS', // SMTP授权码
     },
+
+    // 短信验证码缓存时间，单位 s
+    msgVeriCodeTimeout: 2 * 60,
 }

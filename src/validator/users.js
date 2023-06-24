@@ -3,31 +3,30 @@
  * @author liangjianhui
  */
 
-// 手机号规则
+// 邮箱规则
 const emailRule = {
     type: 'string',
-    pattern:
-        /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/, // 验证邮箱正则
+    // eslint-disable-next-line prettier/prettier, no-useless-escape
+    pattern: '^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$', // 邮箱正则
 }
-
-// emailSchema
-const emailSchema = {
+// 邮箱号 schema
+const emailAddressSchema = {
     type: 'object',
-    required: ['emailAddress'],
+    required: ['emialAddress'],
     properties: {
-        emailAddress: emailRule,
+        emialAddress: emailRule,
         isRemoteTest: {
             type: 'boolean',
         },
     },
 }
 
-// 手机号 + 短信验证码 schema
-const phoneNumberVeriCodeSchema = {
+// 邮箱 + 短信验证码 schema
+const emailVeriCodeSchema = {
     type: 'object',
-    required: ['phoneNumber', 'veriCode'],
+    required: ['emialAddress', 'veriCode'],
     properties: {
-        // phoneNumber: phoneNumberRule,
+        emialAddress: emailRule,
         veriCode: {
             type: 'string',
             pattern: '^\\d{4}$', // 四位数字
@@ -59,7 +58,7 @@ const userInfoSchema = {
 }
 
 module.exports = {
-    emailSchema,
-    phoneNumberVeriCodeSchema,
+    emailAddressSchema,
+    emailVeriCodeSchema,
     userInfoSchema,
 }
