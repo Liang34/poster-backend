@@ -37,9 +37,9 @@ function genValidator(schema) {
      */
     async function validator(ctx, next) {
         const data = ctx.request.body
-        // const validateError = validate(schema, data)
+        const validateError = validate(schema, data)
         console.log(data.emailAddress, emailReg.test(data.emailAddress))
-        if (!data.emailAddress || !emailReg.test(data.emailAddress)) {
+        if (validateError) {
             // 检验失败，返回
             ctx.body = new ErrorRes({
                 ...validateFailInfo, // 其中有 errno 和 message

@@ -1,5 +1,5 @@
 /**
- * @description 通过手机号验证码登录
+ * @description 通过邮箱验证码
  * @author liangjianhui
  */
 // 验证码缓存
@@ -20,12 +20,12 @@ const genPassword = require('../../utils/genPassword')
 const { jwtSign } = require('../../utils/jwt')
 
 /**
- * 通过手机验证码登录
- * @param {string} phoneNumber 手机号
+ * 通过邮箱验证码登录
+ * @param {string} emialAddress 邮箱
  * @param {string} veriCode 验证码
  */
-async function loginByPhoneNumber(phoneNumber, veriCode) {
-    const veriCodeFromCache = await getVeriCodeFromCache(phoneNumber)
+async function loginByemialAddress(emialAddress, veriCode) {
+    const veriCodeFromCache = await getVeriCodeFromCache(emialAddress)
     if (veriCode !== veriCodeFromCache) {
         // 验证码不正确
         return new ErrorRes(loginVeriCodeIncorrectFailInfo)
@@ -33,7 +33,7 @@ async function loginByPhoneNumber(phoneNumber, veriCode) {
 
     // 先查找，找到的就返回
     const userInfo = await findOneUserService({
-        phoneNumber,
+        emialAddress,
     })
     if (userInfo) {
         // 用户是否冻结
@@ -55,17 +55,17 @@ async function loginByPhoneNumber(phoneNumber, veriCode) {
     }
 
     // 查找不到，再创建
-    let password = genPassword() // 手机号注册，生成随机的密码
+    let password = genPassword() // 邮箱号注册，生成随机的密码
     password = doCrypto(password) // 加密密码
 
     try {
         const newUser = await createUserService({
             // 要符合 UserModel 的属性规定
 
-            username: phoneNumber, // 用手机号
+            username: emialAddress, // 用邮箱号
             password,
-            phoneNumber,
-            nickName: `乐高${phoneNumber.slice(-4)}`, // 默认给一个昵称
+            emialAddress,
+            nickName: `海豹${emialAddress.slice(-4)}`, // 默认给一个昵称
             latestLoginAt: new Date(),
         })
         // 创建成功
@@ -78,4 +78,4 @@ async function loginByPhoneNumber(phoneNumber, veriCode) {
     }
 }
 
-module.exports = loginByPhoneNumber
+module.exports = loginByemialAddress
