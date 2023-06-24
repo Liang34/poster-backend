@@ -22,7 +22,6 @@ router.prefix('/api/users')
 // 生成邮箱验证码
 router.post('/genVeriCode', genValidator(emailSchema), async ctx => {
     const { emailAddress } = ctx.request.body
-
     // 尝试发送验证码
     const res = await sendVeriCode(emailAddress)
 

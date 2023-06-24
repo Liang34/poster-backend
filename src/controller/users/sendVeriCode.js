@@ -6,7 +6,6 @@
 const nodemailer = require('nodemailer')
 const smtpTransport = require('nodemailer-smtp-transport')
 const { getVeriCodeFromCache, setVeriCodeToCache } = require('../../cache/users/veriCode')
-const { sendVeriCodeMsg } = require('../../vendor/sendMsg')
 const {
     sendVeriCodeFrequentlyFailInfo,
     sendVeriCodeErrorFailInfo,
@@ -24,10 +23,6 @@ async function sendVeriCode(emailAddress) {
     // 从缓存获取验证码，看是否有效
     const codeFromCache = await getVeriCodeFromCache(emailAddress)
     if (codeFromCache) {
-        if (!isPrd) {
-            // 非线上环境，直接返回
-            return new SuccessRes({ code: codeFromCache })
-        }
         // 说明刚刚已经发送过，不要再重新发送 —— 【注意】如不做这个限制，轻易重复发送，导致邮箱服务出问题
         return new ErrorRes(sendVeriCodeFrequentlyFailInfo)
     }
@@ -52,9 +47,9 @@ async function sendVeriCode(emailAddress) {
             subject: '验证你的电子邮件', // 标题
             html: `
       <p>你好！</p>
-      <p>您正在注册账号</p>
+      <p>您正在登录账号</p>
       <p>你的验证码是：<strong style="color: #ff4e2a;">${veriCode}</strong></p>
-      <p>***该验证码5分钟内有效***</p>`, // html 内容
+      <p>***该验证码2分钟内有效***</p>`, // html 内容
         },
         (error, data) => {
             transport.close() // 如果没用，关闭连接池

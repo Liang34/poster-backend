@@ -7,10 +7,9 @@ const Ajv = require('ajv')
 const { ErrorRes } = require('../res-model/index')
 const { validateFailInfo } = require('../res-model/failInfo/index')
 
-const ajv = new Ajv({
-    allErrors: true, // 输出所有错误
-})
-
+const ajv = new Ajv()
+// eslint-disable-next-line no-useless-escape
+const emailReg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
 /**
  * json schema 校验
  * @param {Object} schema json schema 规则
@@ -18,7 +17,8 @@ const ajv = new Ajv({
  * @returns {Array|undefined} 错误信息|undefined
  */
 function validate(schema, data = {}) {
-    const valid = ajv.validate(schema, data)
+    const validateCompile = ajv.compile(schema)
+    const valid = validateCompile(data)
     if (!valid) {
         return ajv.errors
     }
@@ -37,13 +37,13 @@ function genValidator(schema) {
      */
     async function validator(ctx, next) {
         const data = ctx.request.body
-
-        const validateError = validate(schema, data)
-        if (validateError) {
+        // const validateError = validate(schema, data)
+        console.log(data.emailAddress, emailReg.test(data.emailAddress))
+        if (!data.emailAddress || !emailReg.test(data.emailAddress)) {
             // 检验失败，返回
             ctx.body = new ErrorRes({
                 ...validateFailInfo, // 其中有 errno 和 message
-                data: validateError, // 把失败信息也返回给前端
+                data: '邮箱格式有误', // 把失败信息也返回给前端
             })
             return
         }

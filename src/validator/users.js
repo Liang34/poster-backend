@@ -3,25 +3,6 @@
  * @author liangjianhui
  */
 
-// 手机号规则
-const emailRule = {
-    type: 'string',
-    pattern:
-        /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/, // 验证邮箱正则
-}
-
-// emailSchema
-const emailSchema = {
-    type: 'object',
-    required: ['emailAddress'],
-    properties: {
-        emailAddress: emailRule,
-        isRemoteTest: {
-            type: 'boolean',
-        },
-    },
-}
-
 // 手机号 + 短信验证码 schema
 const phoneNumberVeriCodeSchema = {
     type: 'object',
@@ -59,7 +40,6 @@ const userInfoSchema = {
 }
 
 module.exports = {
-    emailSchema,
     phoneNumberVeriCodeSchema,
     userInfoSchema,
 }
