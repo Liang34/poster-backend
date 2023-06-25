@@ -43,4 +43,13 @@ module.exports = {
     h5Origin: 'http://localhost:3001',
     // jwt过期时间
     jwtExpiresIn: '1d',
+    // 阿里云 OSS 配置
+    aliyunOSSConf: {
+        accessKeyId: 'LTAI5t6rWpmiNfUENfG352z2',
+        accessKeySecret: 'LDiPOPMVVjJbf1af0wzOc0zSSQ963v',
+        bucket: 'poster-master',
+        region: 'oss-cn-guangzhou',
+    },
+    // 阿里云 OSS CDN 配置，Sam 老师提供
+    aliyunOSS_CDNHost: 'static-dev.imooc-lego.com',
 }
