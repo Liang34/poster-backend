@@ -18,11 +18,11 @@ const User = seq.define('user', {
         allowNull: false,
         comment: '密码',
     },
-    phoneNumber: {
+    emialAddress: {
         type: STRING,
         allowNull: false,
         unique: 'username',
-        comment: '手机号，唯一',
+        comment: '邮箱，唯一',
     },
     nickName: {
         type: STRING,

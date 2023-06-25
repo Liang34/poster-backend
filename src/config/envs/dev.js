@@ -32,4 +32,15 @@ module.exports = {
 
     // 短信验证码缓存时间，单位 s
     msgVeriCodeTimeout: 2 * 60,
+    // 内容审核
+    // APP_ID, API_KEY, SECRET_KEY } = baiduCloudCensorConf
+    baiduCloudCensorConf: {
+        APP_ID: 35276645,
+        API_KEY: 'iGgvT6Umz5pSZ7tPRvgPsbT9',
+        SECRET_KEY: 'QHH02yYZkDRQiM1C5kL31DeG7FWFOe2S',
+    },
+    // 发布出来的 h5 域名
+    h5Origin: 'http://localhost:3001',
+    // jwt过期时间
+    jwtExpiresIn: '1d',
 }
