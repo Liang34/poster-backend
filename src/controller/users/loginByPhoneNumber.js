@@ -35,6 +35,7 @@ async function loginByemialAddress(emialAddress, veriCode) {
     const userInfo = await findOneUserService({
         emialAddress,
     })
+    console.log(userInfo)
     if (userInfo) {
         // 用户是否冻结
         if (userInfo.isFrozen) return new ErrorRes(userFrozenFailInfo)

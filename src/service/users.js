@@ -10,7 +10,7 @@ const UserModel = require('../models/UserModel')
  * 查找用户信息
  * @param {Object} param0 查询参数
  */
-async function findOneUserService({ username, password, phoneNumber }) {
+async function findOneUserService({ username, password, emialAddress }) {
     // 拼接查询条件
     const whereOpt = {}
     if (username) {
@@ -20,7 +20,7 @@ async function findOneUserService({ username, password, phoneNumber }) {
         // 用户名和密码在一块，因为密码可能重复
         Object.assign(whereOpt, { username, password })
     }
-    if (phoneNumber) Object.assign(whereOpt, { phoneNumber })
+    if (emialAddress) Object.assign(whereOpt, { emialAddress })
 
     // 无查询条件，则返回空
     if (_.isEmpty(whereOpt)) return null
