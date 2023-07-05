@@ -15,4 +15,6 @@ module.exports = {
 
     // 查询列表，默认分页配置
     DEFAULT_PAGE_SIZE: 8,
+    // jwt过期时间
+    jwtExpiresIn: '1d',
 }

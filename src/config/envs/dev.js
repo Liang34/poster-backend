@@ -52,4 +52,6 @@ module.exports = {
     },
     // 阿里云 OSS CDN 配置，Sam 老师提供
     aliyunOSS_CDNHost: 'static-dev.imooc-lego.com',
+    // 允许跨域
+    corsOrigin: '*',
 }

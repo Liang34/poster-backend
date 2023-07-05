@@ -1,6 +1,6 @@
 /**
  * @description 跨域 中间件
- * @author 双越
+ * @author liangjianhui
  */
 
 const cors = require('koa2-cors')
