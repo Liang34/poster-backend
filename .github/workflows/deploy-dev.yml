@@ -2,12 +2,12 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 # github actions 中文文档 https://docs.github.com/cn/actions/getting-started-with-github-actions
 
-name: deploy for dev
+name: deploy for master
 
 on:
     push:
         branches:
-            - 'dev' # 只针对 dev 分支
+            - 'master' # 只针对 dev 分支
         paths:
             - '.github/workflows/*'
             # - '__test__/**' # dev 不需要立即测试
