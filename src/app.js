@@ -12,7 +12,7 @@ const users = require('./routes/users')
 const works = require('./routes/works')
 const utils = require('./routes/utils')
 const jwt = require('./middlewares/jwt')
-
+const template = require('./routes/templates')
 // error handler
 onerror(app)
 
@@ -47,6 +47,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(works.routes(), works.allowedMethods())
 app.use(utils.routes(), utils.allowedMethods())
+app.use(template.routes(), utils.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)
