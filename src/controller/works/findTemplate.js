@@ -74,8 +74,7 @@ async function findPublicTemplates(queryInfo = {}, pageInfo = {}) {
             id,
             uuid,
             title,
-            isTemplate: true,
-            isPublic: true, // 公开的
+            status: 2, // 公开的
         },
         {
             pageIndex,

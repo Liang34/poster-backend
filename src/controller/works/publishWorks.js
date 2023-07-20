@@ -145,6 +145,7 @@ async function publishWork(id, author, isTemplate = false) {
     const updateData = {
         status: 2,
         latestPublishAt: new Date(),
+        isPublic: true
     }
     if (isTemplate) {
         // 发布为模板

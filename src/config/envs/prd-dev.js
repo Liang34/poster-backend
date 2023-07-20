@@ -24,5 +24,5 @@ Object.assign(devConf.mysqlConf, {
 
 // 发布出来的 h5 域名
 devConf.h5Origin = 'http://182.92.168.192:8082'
-
+devConf.corsOrigin='*',
 module.exports = devConf

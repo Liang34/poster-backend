@@ -30,8 +30,8 @@ services:
             - .docker-volumes/mysql/data:/var/lib/mysql # 数据持久化
             - ./mysql/init:/docker-entrypoint-initdb.d/ # 初始化 sql
         environment:
-            - MYSQL_DATABASE=imooc_lego_course # 初始化容器时创建数据库
-            - MYSQL_ROOT_PASSWORD=Mysql_2019
+            - MYSQL_DATABASE=poster # 初始化容器时创建数据库
+            - MYSQL_ROOT_PASSWORD=550530
             - TZ=Asia/Shanghai # 设置时区
     editor-mongo:
         image: mongo # 引用官网 mongo 镜像
@@ -40,7 +40,7 @@ services:
         volumes:
             - '.docker-volumes/mongo/data:/data/db' # 数据持久化
         environment:
-            - MONGO_INITDB_DATABASE=imooc_lego_course
+            - MONGO_INITDB_DATABASE=poster
             - TZ=Asia/Shanghai # 设置时区
         ports:
             - '27016:27017' # 宿主机可以用 127.0.0.1:27016 即可连接容器中的数据库

@@ -12,6 +12,7 @@ const users = require('./routes/users')
 const works = require('./routes/works')
 const utils = require('./routes/utils')
 const jwt = require('./middlewares/jwt')
+const cors = require('./middlewares/cors')
 const template = require('./routes/templates')
 // error handler
 onerror(app)
@@ -25,7 +26,7 @@ app.use(
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(`${__dirname}/public`))
-
+app.use(cors)
 app.use(
     views(`${__dirname}/views`, {
         extension: 'pug',

@@ -15,3 +15,5 @@ CMD npm run prd-dev && npx pm2 log
 # RUN 构建镜像时，一般用于做一些系统配置，安装必备软件，可能多个RUN
 # CMD 启动容器时，只能有一个CMD
 # ENV 环境变量
+# 暴露应用程序端口
+EXPOSE 3000

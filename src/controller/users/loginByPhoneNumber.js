@@ -66,7 +66,7 @@ async function loginByemialAddress(emialAddress, veriCode) {
             username: emialAddress, // 用邮箱号
             password,
             emialAddress,
-            nickName: `海豹${emialAddress.slice(-4)}`, // 默认给一个昵称
+            nickName: `海豹${emialAddress.slice(4)}`, // 默认给一个昵称
             latestLoginAt: new Date(),
         })
         // 创建成功
